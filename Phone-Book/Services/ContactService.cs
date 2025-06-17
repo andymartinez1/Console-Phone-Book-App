@@ -12,12 +12,18 @@ public class ContactService
         var contact = new Contact();
 
         contact.Name = AnsiConsole.Ask<string>("What is the contact's name?");
-        contact.Email = AnsiConsole.Ask<string>("What is the contact's email? (format: example@example.com)");
+        contact.Email = AnsiConsole.Ask<string>(
+            "What is the contact's email? (format: example@example.com)"
+        );
         if (!Validator.IsValidEmail(contact.Email))
         {
-            contact.Email = AnsiConsole.Ask<string>("Incorrect format. Try again (format: example@example.com)");
+            contact.Email = AnsiConsole.Ask<string>(
+                "Incorrect format. Try again (format: example@example.com)"
+            );
         }
-        contact.Phone = AnsiConsole.Ask<string>("What is the contact's phone number? (format: 123-456-7890)");
+        contact.Phone = AnsiConsole.Ask<string>(
+            "What is the contact's phone number? (format: 123-456-7890)"
+        );
 
         ContactController.AddContact(contact);
     }
@@ -31,12 +37,18 @@ public class ContactService
             : contact.Name;
 
         contact.Email = AnsiConsole.Confirm("Update email?")
-            ? contact.Email = AnsiConsole.Ask<string>("Enter new email: (format: example@example.com)")
+            ? contact.Email = AnsiConsole.Ask<string>(
+                "Enter new email: (format: example@example.com)"
+            )
             : contact.Email;
 
         contact.Phone = AnsiConsole.Confirm("Update phone number?")
-            ? contact.Phone = AnsiConsole.Ask<string>("Enter new phone number: (format: 123-456-7890)")
+            ? contact.Phone = AnsiConsole.Ask<string>(
+                "Enter new phone number: (format: 123-456-7890)"
+            )
             : contact.Phone;
+
+        ContactController.EditContact(contact);
     }
 
     internal static void DeleteContact()
@@ -65,9 +77,9 @@ public class ContactService
         var contacts = ContactController.GetAllContacts();
 
         var contactsArray = contacts.Select(c => c.Name).ToArray();
-        var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-            .Title("Choose an option:")
-            .AddChoices(contactsArray));
+        var option = AnsiConsole.Prompt(
+            new SelectionPrompt<string>().Title("Choose an option:").AddChoices(contactsArray)
+        );
 
         var contactId = contacts.Single(c => c.Name == option).Id;
         var contact = ContactController.GetContactById(contactId);

@@ -11,43 +11,44 @@ public class Menu
         var isRunning = true;
         while (isRunning)
         {
-            AnsiConsole.Write(new FigletText("Phone Book")
-                .Color(Color.Aqua));
+            AnsiConsole.Write(new FigletText("Phone Book").Color(Color.Aqua));
 
             var userChoice = AnsiConsole.Prompt(
-                new SelectionPrompt<MenuOptions>()
+                new SelectionPrompt<Enums.MenuOptions>()
                     .Title("What would you like to do?")
                     .AddChoices(
-                        MenuOptions.AddContact,
-                        MenuOptions.ViewContact,
-                        MenuOptions.ViewAllContacts,
-                        MenuOptions.EditContact,
-                        MenuOptions.DeleteContact,
-                        MenuOptions.Quit));
+                        Enums.MenuOptions.AddContact,
+                        Enums.MenuOptions.ViewContact,
+                        Enums.MenuOptions.ViewAllContacts,
+                        Enums.MenuOptions.EditContact,
+                        Enums.MenuOptions.DeleteContact,
+                        Enums.MenuOptions.Quit
+                    )
+            );
 
             switch (userChoice)
             {
-                case MenuOptions.AddContact:
+                case Enums.MenuOptions.AddContact:
                     AnsiConsole.Clear();
                     ContactService.InsertContact();
                     break;
-                case MenuOptions.ViewContact:
+                case Enums.MenuOptions.ViewContact:
                     AnsiConsole.Clear();
                     ContactService.GetContactById();
                     break;
-                case MenuOptions.ViewAllContacts:
+                case Enums.MenuOptions.ViewAllContacts:
                     AnsiConsole.Clear();
                     ContactService.GetAllContacts();
                     break;
-                case MenuOptions.EditContact:
+                case Enums.MenuOptions.EditContact:
                     AnsiConsole.Clear();
                     ContactService.UpdateContact();
                     break;
-                case MenuOptions.DeleteContact:
+                case Enums.MenuOptions.DeleteContact:
                     AnsiConsole.Clear();
                     ContactService.DeleteContact();
                     break;
-                case MenuOptions.Quit:
+                case Enums.MenuOptions.Quit:
                     AnsiConsole.WriteLine("Goodbye");
                     isRunning = false;
                     break;
