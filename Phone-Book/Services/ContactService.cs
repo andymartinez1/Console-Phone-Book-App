@@ -24,6 +24,7 @@ public class ContactService
         contact.Phone = AnsiConsole.Ask<string>(
             "What is the contact's phone number? (format: 123-456-7890)"
         );
+        contact.Category = CategoryService.GetCategoryByName();
 
         ContactController.AddContact(contact);
     }
@@ -47,6 +48,10 @@ public class ContactService
                 "Enter new phone number: (format: 123-456-7890)"
             )
             : contact.Phone;
+
+        contact.Category = AnsiConsole.Confirm("Update category?")
+            ? CategoryService.GetCategoryByName()
+            : contact.Category;
 
         ContactController.EditContact(contact);
     }

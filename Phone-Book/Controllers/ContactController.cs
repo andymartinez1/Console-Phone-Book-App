@@ -1,4 +1,5 @@
-﻿using Phone_Book.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Phone_Book.Data;
 using Phone_Book.Models;
 
 namespace Phone_Book.Controllers;
@@ -29,7 +30,7 @@ internal class ContactController
     internal static Contact GetContactById(int id)
     {
         using var db = new ContactContext();
-        var contact = db.Contacts.SingleOrDefault(c => c.Id == id);
+        var contact = db.Contacts.Include(c => c.Category).SingleOrDefault(c => c.Id == id);
 
         return contact;
     }
@@ -37,7 +38,7 @@ internal class ContactController
     internal static List<Contact> GetAllContacts()
     {
         using var db = new ContactContext();
-        var contacts = db.Contacts.ToList();
+        var contacts = db.Contacts.Include(c => c.Category).ToList();
 
         return contacts;
     }

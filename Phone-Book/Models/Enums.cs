@@ -2,13 +2,29 @@
 
 public class Enums
 {
-    public enum MenuOptions
+    public enum MainMenuOptions
+    {
+        ManageCategories,
+        ManageContacts,
+        Quit,
+    }
+
+    public enum CategoryMenuOptions
+    {
+        AddCategory,
+        ViewAllCategories,
+        EditCategory,
+        DeleteCategory,
+        BackToMainMenu,
+    }
+
+    public enum ContactMenuOptions
     {
         AddContact,
         ViewContact,
         ViewAllContacts,
         EditContact,
         DeleteContact,
-        Quit,
+        BackToMainMenu,
     }
 }
