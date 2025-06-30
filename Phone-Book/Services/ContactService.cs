@@ -12,19 +12,26 @@ public class ContactService
         var contact = new Contact();
 
         contact.Name = AnsiConsole.Ask<string>("What is the contact's name?");
+
         contact.Email = AnsiConsole.Ask<string>(
             "What is the contact's email? (format: example@example.com)"
         );
-        if (!Validator.IsValidEmail(contact.Email))
-        {
+
+        while (!Validator.IsValidEmail(contact.Email))
             contact.Email = AnsiConsole.Ask<string>(
-                "Incorrect format. Try again (format: example@example.com)"
+                "[Red]Incorrect format. Try again (format: example@example.com)[/]"
             );
-        }
+
         contact.Phone = AnsiConsole.Ask<string>(
             "What is the contact's phone number? (format: 123-456-7890)"
         );
-        contact.Category = CategoryService.GetCategoryByName();
+
+        while (!Validator.IsValidPhone(contact.Phone))
+            contact.Phone = AnsiConsole.Ask<string>(
+                "[Red]Incorrect format or length. Try again (format: 123-456-7890)[/]"
+            );
+
+        contact.CategoryId = CategoryService.GetCategoryByName().CategoryId;
 
         ContactController.AddContact(contact);
     }

@@ -28,9 +28,9 @@ internal class ContactContext : DbContext
             .HasData(
                 new List<Category>
                 {
-                    new Category { CategoryId = 1, CategoryName = "Family" },
-                    new Category { CategoryId = 2, CategoryName = "Friends" },
-                    new Category { CategoryId = 3, CategoryName = "Work" },
+                    new() { CategoryId = 1, CategoryName = "Family" },
+                    new() { CategoryId = 2, CategoryName = "Friends" },
+                    new() { CategoryId = 3, CategoryName = "Work" }
                 }
             );
 
@@ -39,54 +39,78 @@ internal class ContactContext : DbContext
             .HasData(
                 new List<Contact>
                 {
-                    new Contact
+                    new()
                     {
                         Id = 1,
-                        Name = "John Doe",
-                        Email = "JDoe@gmail.com",
-                        Phone = "1234567890",
-                        CategoryId = 1,
+                        Name = "Julienne Husher",
+                        Email = "jhusher0@ted.com",
+                        Phone = "128-187-6389",
+                        CategoryId = 1
                     },
-                    new Contact
+                    new()
                     {
                         Id = 2,
-                        Name = "Jane Smith",
-                        Email = "jsmith@hotmail.com",
-                        Phone = "0987654321",
-                        CategoryId = 2,
+                        Name = "Farlay Kemball",
+                        Email = "fkemball1@webmd.com",
+                        Phone = "178-994-6729",
+                        CategoryId = 1
                     },
-                    new Contact
+                    new()
                     {
                         Id = 3,
-                        Name = "Alice Johnson",
-                        Email = "alicej@gmail.com",
-                        Phone = "5555555555",
-                        CategoryId = 3,
+                        Name = "Golda Garahan",
+                        Email = "ggarahan2@51.la",
+                        Phone = "468-314-0933",
+                        CategoryId = 1
                     },
-                    new Contact
+                    new()
                     {
                         Id = 4,
-                        Name = "Bob Brown",
-                        Email = "bbrown@yahoo.com",
-                        Phone = "4444444444",
-                        CategoryId = 1,
+                        Name = "Lisha MacCague",
+                        Email = "lmaccague3@w3.org",
+                        Phone = "999-787-9493",
+                        CategoryId = 2
                     },
-                    new Contact
+                    new()
                     {
                         Id = 5,
-                        Name = "Charlie White",
-                        Email = "charliew@aol.com",
-                        Phone = "3333333333",
-                        CategoryId = 2,
+                        Name = "Nikki Bockin",
+                        Email = "nbockin4@taobao.com",
+                        Phone = "847-451-1638",
+                        CategoryId = 2
                     },
-                    new Contact
+                    new()
                     {
                         Id = 6,
-                        Name = "David Green",
-                        Email = "davidg@gmail.com",
-                        Phone = "2222222222",
-                        CategoryId = 3,
+                        Name = "Jemimah Grishanov",
+                        Email = "jgrishanov5@blogger.com",
+                        Phone = "606-400-0266",
+                        CategoryId = 2
                     },
+                    new()
+                    {
+                        Id = 7,
+                        Name = "Tersina Lettuce",
+                        Email = "tlettuce6@tuttocitta.it",
+                        Phone = "164-204-3869",
+                        CategoryId = 3
+                    },
+                    new()
+                    {
+                        Id = 8,
+                        Name = "Gradey Rampling",
+                        Email = "grampling7@yellowpages.com",
+                        Phone = "649-743-0045",
+                        CategoryId = 3
+                    },
+                    new()
+                    {
+                        Id = 9,
+                        Name = "Simonette Mollnar",
+                        Email = "smollnar8@hubpages.com",
+                        Phone = "120-226-6327",
+                        CategoryId = 3
+                    }
                 }
             );
     }

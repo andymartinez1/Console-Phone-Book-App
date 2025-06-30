@@ -1,19 +1,49 @@
-﻿namespace Phone_Book.Services;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+
+namespace Phone_Book.Services;
 
 public class Validator
 {
     internal static bool IsValidEmail(string email)
     {
-        var trimmedEmail = email.Trim();
-
-        if (trimmedEmail.EndsWith(".")) return false;
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
 
         try
         {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == trimmedEmail;
+            // Normalize the domain
+            email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+            // Examines the domain part of the email and normalizes it.
+            string DomainMapper(Match match)
+            {
+                // Use IdnMapping class to convert Unicode domain names.
+                var idn = new IdnMapping();
+
+                // Pull out and process domain name (throws ArgumentException on invalid)
+                var domainName = idn.GetAscii(match.Groups[2].Value);
+
+                return match.Groups[1].Value + domainName;
+            }
         }
-        catch
+        catch (RegexMatchTimeoutException e)
+        {
+            return false;
+        }
+        catch (ArgumentException e)
+        {
+            return false;
+        }
+
+        try
+        {
+            return Regex.IsMatch(email,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+        }
+        catch (RegexMatchTimeoutException)
         {
             return false;
         }
@@ -21,10 +51,11 @@ public class Validator
 
     internal static bool IsValidPhone(string phone)
     {
-        var correctFormat = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+        var correctFormat = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$");
 
-        // TODO: Compare string input with the correct format
+        if (string.IsNullOrWhiteSpace(phone) || phone.Length != 12)
+            return false;
 
-        return true;
+        return correctFormat.IsMatch(phone);
     }
 }

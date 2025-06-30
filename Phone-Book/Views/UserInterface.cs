@@ -9,21 +9,19 @@ internal class UserInterface
     {
         var table = new Table();
         table.AddColumn("Id");
-        table.AddColumn("[blue]Name[/]");
+        table.AddColumn("Name");
         table.AddColumn("Email");
         table.AddColumn("Phone Number");
         table.AddColumn("Category");
 
         foreach (var contact in contacts)
-        {
             table.AddRow(
-                $"[yellow]{contact.Id.ToString()}[/]",
+                contact.Id.ToString(),
                 contact.Name,
                 contact.Email,
                 contact.Phone,
                 contact.Category.CategoryName
             );
-        }
 
         AnsiConsole.Write(table);
     }
@@ -45,10 +43,7 @@ internal class UserInterface
         table.AddColumn("Id");
         table.AddColumn("Name");
 
-        foreach (var category in categories)
-        {
-            table.AddRow(category.CategoryId.ToString(), category.CategoryName);
-        }
+        foreach (var category in categories) table.AddRow(category.CategoryId.ToString(), category.CategoryName);
 
         AnsiConsole.Write(table);
     }

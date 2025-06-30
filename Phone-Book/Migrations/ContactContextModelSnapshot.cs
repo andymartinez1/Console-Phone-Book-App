@@ -52,11 +52,6 @@ namespace Phone_Book.Migrations
                         {
                             CategoryId = 3,
                             CategoryName = "Work"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            CategoryName = "Other"
                         });
                 });
 
@@ -88,6 +83,56 @@ namespace Phone_Book.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Email = "JDoe@gmail.com",
+                            Name = "John Doe",
+                            Phone = "123-456-7890"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            Email = "jsmith@hotmail.com",
+                            Name = "Jane Smith",
+                            Phone = "098-765-4321"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            Email = "alicej@gmail.com",
+                            Name = "Alice Johnson",
+                            Phone = "555-555-5555"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 1,
+                            Email = "bbrown@yahoo.com",
+                            Name = "Bob Brown",
+                            Phone = "444-444-4444"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 2,
+                            Email = "charliew@aol.com",
+                            Name = "Charlie White",
+                            Phone = "333-333-3333"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            Email = "davidg@gmail.com",
+                            Name = "David Green",
+                            Phone = "222-222-2222"
+                        });
                 });
 
             modelBuilder.Entity("Phone_Book.Models.Contact", b =>
