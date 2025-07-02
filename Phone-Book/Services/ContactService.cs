@@ -101,15 +101,8 @@ public class ContactService
 
     internal static string GetContactByEmail()
     {
-        var contacts = ContactController.GetAllContacts();
+        var contact = GetContactByName();
 
-        var contactsArray = contacts.Select(c => c.Name).ToArray();
-        var option = AnsiConsole.Prompt(
-            new SelectionPrompt<string>().Title("Choose an option:").AddChoices(contactsArray)
-        );
-
-        var email = contacts.Single(c => c.Email == option).Email;
-
-        return email;
+        return contact.Email;
     }
 }

@@ -6,21 +6,13 @@ namespace Phone_Book.Views;
 
 public class Menu
 {
-    private readonly Enums.MainMenuOptions[] _mainMenuOptions =
-    [
-        Enums.MainMenuOptions.ManageCategories,
-        Enums.MainMenuOptions.ManageContacts,
-        Enums.MainMenuOptions.SendEmail,
-        Enums.MainMenuOptions.Quit,
-    ];
-
     private readonly Enums.CategoryMenuOptions[] _categoryMenuOptions =
     [
         Enums.CategoryMenuOptions.AddCategory,
         Enums.CategoryMenuOptions.ViewAllCategories,
         Enums.CategoryMenuOptions.EditCategory,
         Enums.CategoryMenuOptions.DeleteCategory,
-        Enums.CategoryMenuOptions.BackToMainMenu,
+        Enums.CategoryMenuOptions.BackToMainMenu
     ];
 
     private readonly Enums.ContactMenuOptions[] _contactMenuOptions =
@@ -30,7 +22,15 @@ public class Menu
         Enums.ContactMenuOptions.ViewAllContacts,
         Enums.ContactMenuOptions.EditContact,
         Enums.ContactMenuOptions.DeleteContact,
-        Enums.ContactMenuOptions.BackToMainMenu,
+        Enums.ContactMenuOptions.BackToMainMenu
+    ];
+
+    private readonly Enums.MainMenuOptions[] _mainMenuOptions =
+    [
+        Enums.MainMenuOptions.ManageCategories,
+        Enums.MainMenuOptions.ManageContacts,
+        Enums.MainMenuOptions.SendEmail,
+        Enums.MainMenuOptions.Quit
     ];
 
     internal void MainMenu()
@@ -57,7 +57,7 @@ public class Menu
                     break;
                 case Enums.MainMenuOptions.SendEmail:
                     AnsiConsole.Clear();
-                    MailMessage.SendEmail();
+                    EmailService.SendEmail();
                     break;
                 case Enums.MainMenuOptions.Quit:
                     AnsiConsole.WriteLine("Goodbye");
