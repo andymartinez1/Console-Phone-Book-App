@@ -6,12 +6,31 @@ namespace Phone_Book.Views;
 
 public class Menu
 {
-    private readonly Enums.MainMenuOptions[] _menuOptions =
+    private readonly Enums.MainMenuOptions[] _mainMenuOptions =
     [
         Enums.MainMenuOptions.ManageCategories,
         Enums.MainMenuOptions.ManageContacts,
         Enums.MainMenuOptions.SendEmail,
         Enums.MainMenuOptions.Quit,
+    ];
+
+    private readonly Enums.CategoryMenuOptions[] _categoryMenuOptions =
+    [
+        Enums.CategoryMenuOptions.AddCategory,
+        Enums.CategoryMenuOptions.ViewAllCategories,
+        Enums.CategoryMenuOptions.EditCategory,
+        Enums.CategoryMenuOptions.DeleteCategory,
+        Enums.CategoryMenuOptions.BackToMainMenu,
+    ];
+
+    private readonly Enums.ContactMenuOptions[] _contactMenuOptions =
+    [
+        Enums.ContactMenuOptions.AddContact,
+        Enums.ContactMenuOptions.ViewContact,
+        Enums.ContactMenuOptions.ViewAllContacts,
+        Enums.ContactMenuOptions.EditContact,
+        Enums.ContactMenuOptions.DeleteContact,
+        Enums.ContactMenuOptions.BackToMainMenu,
     ];
 
     internal void MainMenu()
@@ -23,7 +42,8 @@ public class Menu
             var userChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<Enums.MainMenuOptions>()
                     .Title("What would you like to do?")
-                    .AddChoices())
+                    .AddChoices(_mainMenuOptions)
+                    .UseConverter(c => c.GetDisplayName())
             );
             switch (userChoice)
             {
@@ -58,13 +78,8 @@ public class Menu
             var userChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<Enums.CategoryMenuOptions>()
                     .Title("What would you like to do?")
-                    .AddChoices(
-                        Enums.CategoryMenuOptions.AddCategory,
-                        Enums.CategoryMenuOptions.ViewAllCategories,
-                        Enums.CategoryMenuOptions.EditCategory,
-                        Enums.CategoryMenuOptions.DeleteCategory,
-                        Enums.CategoryMenuOptions.BackToMainMenu
-                    )
+                    .AddChoices(_categoryMenuOptions)
+                    .UseConverter(c => c.GetDisplayName())
             );
 
             switch (userChoice)
@@ -103,14 +118,8 @@ public class Menu
             var userChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<Enums.ContactMenuOptions>()
                     .Title("What would you like to do?")
-                    .AddChoices(
-                        Enums.ContactMenuOptions.AddContact,
-                        Enums.ContactMenuOptions.ViewContact,
-                        Enums.ContactMenuOptions.ViewAllContacts,
-                        Enums.ContactMenuOptions.EditContact,
-                        Enums.ContactMenuOptions.DeleteContact,
-                        Enums.ContactMenuOptions.BackToMainMenu
-                    )
+                    .AddChoices(_contactMenuOptions)
+                    .UseConverter(c => c.GetDisplayName())
             );
 
             switch (userChoice)

@@ -1,6 +1,5 @@
-﻿using System.Net;
-using System.Net.Mail;
-using Spectre.Console;
+﻿using MimeKit;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace Phone_Book.Services;
 
@@ -8,30 +7,26 @@ public class MailMessage
 {
     public static void SendEmail()
     {
-        string toEmail = ContactService.GetContactByEmail();
-        string subject = AnsiConsole.Ask<string>("Subject: ", "");
-        string body = AnsiConsole.Ask<string>("Mail: ");
+        var email = new MimeMessage();
 
-        var fromAddress = new MailAddress("youraddress@example.com", "Your Name");
-        var toAddress = new MailAddress(toEmail);
-        const string fromPassword = "yourpassword";
+        email.From.Add(new MailboxAddress("Sender Name", "sender@email.com"));
+        email.To.Add(new MailboxAddress("Receiver Name", "receiver@email.com"));
 
-        var smtp = new SmtpClient
+        email.Subject = "Testing out email sending";
+        email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
         {
-            Host = "smtp.example.com",
-            Port = 587,
-            EnableSsl = true,
-            DeliveryMethod = SmtpDeliveryMethod.Network,
-            UseDefaultCredentials = false,
-            Credentials = new NetworkCredential(fromAddress.Address, fromPassword),
+            Text = "<b>Hello all the way from the land of C#</b>",
         };
 
-        using var message = new System.Net.Mail.MailMessage(fromAddress, toAddress)
+        using (var smtp = new SmtpClient())
         {
-            Subject = subject,
-            Body = body,
-            IsBodyHtml = false,
-        };
-        smtp.Send(message);
+            smtp.Connect("smtp.gmail.com", 587);
+
+            // Note: only needed if the SMTP server requires authentication
+            smtp.Authenticate("smtp_username", "smtp_password");
+
+            smtp.Send(email);
+            smtp.Disconnect(true);
+        }
     }
 }

@@ -108,9 +108,8 @@ public class ContactService
             new SelectionPrompt<string>().Title("Choose an option:").AddChoices(contactsArray)
         );
 
-        var email = contacts.Single(c => c.Email == option).Id;
-        var contact = ContactController.GetContactById(email).ToString();
+        var email = contacts.Single(c => c.Email == option).Email;
 
-        return contact;
+        return email;
     }
 }
