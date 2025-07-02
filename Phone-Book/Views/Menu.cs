@@ -6,7 +6,15 @@ namespace Phone_Book.Views;
 
 public class Menu
 {
-    internal static void MainMenu()
+    private readonly Enums.MainMenuOptions[] _menuOptions =
+    [
+        Enums.MainMenuOptions.ManageCategories,
+        Enums.MainMenuOptions.ManageContacts,
+        Enums.MainMenuOptions.SendEmail,
+        Enums.MainMenuOptions.Quit,
+    ];
+
+    internal void MainMenu()
     {
         var isRunning = true;
         while (isRunning)
@@ -15,11 +23,7 @@ public class Menu
             var userChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<Enums.MainMenuOptions>()
                     .Title("What would you like to do?")
-                    .AddChoices(
-                        Enums.MainMenuOptions.ManageCategories,
-                        Enums.MainMenuOptions.ManageContacts,
-                        Enums.MainMenuOptions.Quit
-                    )
+                    .AddChoices())
             );
             switch (userChoice)
             {
@@ -30,6 +34,10 @@ public class Menu
                 case Enums.MainMenuOptions.ManageContacts:
                     AnsiConsole.Clear();
                     ContactMenu();
+                    break;
+                case Enums.MainMenuOptions.SendEmail:
+                    AnsiConsole.Clear();
+                    MailMessage.SendEmail();
                     break;
                 case Enums.MainMenuOptions.Quit:
                     AnsiConsole.WriteLine("Goodbye");
@@ -42,7 +50,7 @@ public class Menu
         }
     }
 
-    private static void CategoryMenu()
+    private void CategoryMenu()
     {
         var isRunning = true;
         while (isRunning)
@@ -87,7 +95,7 @@ public class Menu
         }
     }
 
-    internal static void ContactMenu()
+    internal void ContactMenu()
     {
         var isRunning = true;
         while (isRunning)

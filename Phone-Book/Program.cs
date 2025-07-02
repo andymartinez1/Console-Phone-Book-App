@@ -5,4 +5,6 @@ var context = new ContactContext();
 context.Database.EnsureDeleted();
 context.Database.EnsureCreated();
 
-Menu.MainMenu();
+var menu = new Menu();
+
+menu.MainMenu();
