@@ -19,9 +19,9 @@ internal class ContactContext : DbContext
     {
         modelBuilder
             .Entity<Contact>()
-            .HasOne(c => c.Category)
-            .WithMany(c => c.Contacts)
-            .HasForeignKey(c => c.CategoryId);
+            .HasOne(co => co.Category)
+            .WithMany(ca => ca.Contacts)
+            .HasForeignKey(co => co.CategoryId);
 
         modelBuilder
             .Entity<Category>()

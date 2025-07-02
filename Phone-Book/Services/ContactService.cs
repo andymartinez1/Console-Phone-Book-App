@@ -40,25 +40,64 @@ public class ContactService
     {
         var contact = GetContactByName();
 
-        contact.Name = AnsiConsole.Confirm("Update name?")
-            ? contact.Name = AnsiConsole.Ask<string>("Enter new name:")
-            : contact.Name;
+        var updateName = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Do you want to update the contact's name?")
+                .AddChoices("Yes", "No")
+        );
+        if (updateName == "Yes")
+            contact.Name = AnsiConsole.Ask<string>("What is the contact's name?");
+        else
+            contact.Name = contact.Name;
 
-        contact.Email = AnsiConsole.Confirm("Update email?")
-            ? contact.Email = AnsiConsole.Ask<string>(
-                "Enter new email: (format: example@example.com)"
-            )
-            : contact.Email;
+        var updateEmail = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Do you want to update the contact's email address?")
+                .AddChoices("Yes", "No")
+        );
+        if (updateEmail == "Yes")
+        {
+            contact.Email = AnsiConsole.Ask<string>(
+                "What is the contact's email? (format: example@example.com)"
+            );
 
-        contact.Phone = AnsiConsole.Confirm("Update phone number?")
-            ? contact.Phone = AnsiConsole.Ask<string>(
-                "Enter new phone number: (format: 123-456-7890)"
-            )
-            : contact.Phone;
+            while (!Validator.IsValidEmail(contact.Email))
+                contact.Email = AnsiConsole.Ask<string>(
+                    "[Red]Incorrect format. Try again (format: example@example.com)[/]"
+                );
+        }
+        else
+        {
+            contact.Email = contact.Email;
+        }
 
-        contact.Category = AnsiConsole.Confirm("Update category?")
-            ? CategoryService.GetCategoryByName()
-            : contact.Category;
+        var updatePhoneNumber = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Do you want to update the contact's phone number?")
+                .AddChoices("Yes", "No")
+        );
+        if (updatePhoneNumber == "Yes")
+        {
+            contact.Phone = AnsiConsole.Ask<string>(
+                "What is the contact's phone number? (format: 123-456-7890)"
+            );
+
+            while (!Validator.IsValidPhone(contact.Phone))
+                contact.Phone = AnsiConsole.Ask<string>(
+                    "[Red]Incorrect format or length. Try again (format: 123-456-7890)[/]"
+                );
+        }
+        else
+        {
+            contact.Phone = contact.Phone;
+        }
+
+        var updateCategory = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Do you want to update the contact's category?")
+                .AddChoices("Yes", "No")
+        );
+        contact.CategoryId = updateCategory == "Yes" ? CategoryService.GetCategoryByName().CategoryId : contact.CategoryId;
 
         ContactController.EditContact(contact);
     }

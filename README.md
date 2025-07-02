@@ -1,13 +1,13 @@
 # Phonebook Console App
 
-![alt text](Main-Screen.png)
+![main screen](Phone-Book/docs/images/Main-Screen.png)
 
 A simple .NET console application for adding and managing contacts. Contacts are categorized as family, work or friends.
 You can also add new categories and contacts, edit existing ones or delete them.
 
 This app offers the ability to choose a contact from your list and send an email to them. You must have a Gmail account to use it. It also requires the use of "App Passwords" so as to not store any passwords in this project, for security reasons.
 
-![alt text](Choose-Contact.png)
+![choose contact](Phone-Book/docs/images/Choose-Contact.png)
 
 ## Features
 
@@ -18,7 +18,7 @@ This app offers the ability to choose a contact from your list and send an email
 
 ## Getting Started
 
-<mark>Important note! You must have a database in SQL Server named "phonebook" to use this app</mark>
+<mark>Important note! You must have a database in SQL Server named "phonebook" in (LocalDB)\MSSQLLocalDB to use this app</mark>
 
 1. Clone the repository:
 
@@ -44,13 +44,13 @@ This app offers the ability to choose a contact from your list and send an email
 7. For password, you must have 2FA enabled on your Gmail account. Then in the security settings, you can generate an app
    password:
 
-![alt text](App-Passwords.png)
+![app passwords](Phone-Book/docs/images/App-Passwords.png)
 
-![alt text](Generated-App-Password.png)
+![generated password](Phone-Book/docs/images/Generated-App-Password.png)
 
 8. The generated app password is what must be entered:
 
-![alt text](Send-Email.png)
+![send email](Phone-Book/docs/images/Send-Email.png)
 
 ## Technologies Used
 
